@@ -41,7 +41,8 @@ const Stats = (
         }
 
         const resultRef = collection(db, 'Results');
-        const {uid} = auth.currentUser;
+        const uid = auth.currentUser?.uid;
+        if(!uid) return;
         
         addDoc(resultRef, {
             wpm: wpm,
@@ -92,7 +93,7 @@ const Stats = (
                 transition: Bounce,
                });
         }
-    })
+    }, [])
 
     return (
         <div className="stats-box">

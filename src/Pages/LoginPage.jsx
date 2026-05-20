@@ -12,12 +12,14 @@ import {toast, Bounce} from 'react-toastify'
 import errorMapping from '../Utils/errorMapping';
 import GoogleButton from "react-google-button";
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
+import { Navigate, Router, useNavigate } from "react-router-dom";
 // import { redirect } from "react-router-dom";
 
 
 const googleProvider = new GoogleAuthProvider();
 
 const handleGoogleSignIn = () => {
+
     signInWithPopup(auth, googleProvider).then((res)=>{
         toast.success('Google Login Successful', {
             position: "top-right",
@@ -50,6 +52,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const navigate = useNavigate()
 
     //Function for Handling Sign up Requests
     const handleSignUp = () => {
@@ -95,7 +99,8 @@ const Login = () => {
                     theme: "light",
                     transition: Bounce,
                     });
-                <redirect to="HomePage.jsx"/>
+
+                    navigate('/');
             })
             .catch((err) => {
                 
@@ -143,7 +148,7 @@ const Login = () => {
                     theme: "light",
                     transition: Bounce,
                     });
-                <redirect to="HomePage.jsx"/>
+                navigate('/');
             })
             .catch((err) => {
                 console.log(err);
